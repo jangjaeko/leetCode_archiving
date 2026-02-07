@@ -7,6 +7,7 @@ var threeSum = function (nums) {
   const result = [];
 
   for (let i = 0; i < nums.length - 2; i++) {
+    // i 중복 제거: 이전 값과 같으면 건너뛰기
     if (i > 0 && nums[i] === nums[i - 1]) continue;
     let left = i + 1;
     let right = nums.length - 1;
