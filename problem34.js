@@ -12,7 +12,7 @@ var searchRange = function (nums, target) {
 
     while (left <= right) {
       const mid = Math.floor((left + right) / 2);
-
+      console.log(mid, left, right);
       if (nums[mid] === target) {
         result = mid;
         right = mid - 1; // ← 왼쪽으로 계속 탐색
