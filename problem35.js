@@ -10,7 +10,7 @@ var searchInsert = function (nums, target) {
   if (target > nums[right]) return right + 1;
   if (target < nums[0]) return left;
   while (left <= right) {
-    let mid = left + Math.floor((right - left) / 2);
+    let mid = Math.floor((left + right) / 2);
     console.log(mid, left, right);
     if (nums[mid] === target) {
       result = mid;
@@ -24,4 +24,4 @@ var searchInsert = function (nums, target) {
   return left;
 };
 
-console.log(searchInsert([1, 3, 5, 7], 2));
+console.log(searchInsert([1, 3, 5, 7], 5));
