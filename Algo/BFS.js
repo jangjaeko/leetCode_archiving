@@ -77,3 +77,81 @@ console.log(
     [0, 0, 1, 1, 1],
   ]),
 );
+
+function bfs(start, graph) {
+  const visited = new Set();
+  const queue = [start];
+
+  visited.add(start);
+
+  while (queue.length > 0) {
+    const node = queue.shift();
+    console.log(node);
+
+    for (const next of graph[node]) {
+      if (!visited.has(next)) {
+        visited.add(next);
+        queue.push(next);
+      }
+    }
+  }
+}
+
+const graph = {
+  1: [2, 3],
+  2: [4],
+  3: [],
+  4: [],
+};
+
+bfs(1, graph);
+
+function bfs2(grid, startX, startY) {
+  const n = grid.length;
+  const m = grid[0].length;
+
+  const visited = Array.from({ length: n }, () => Array(m).fill(false));
+
+  const directions = [
+    [0, 1],
+    [1, 0],
+    [0, -1],
+    [-1, 0],
+  ];
+
+  let queue = [[startX, startY]];
+  visited[startX][startY] = true;
+
+  let area = 0;
+
+  while (queue.length > 0) {
+    const [x, y] = queue.shift();
+    area++;
+
+    for (const [dx, dy] of directions) {
+      const nx = x + dx;
+      const ny = y + dy;
+
+      if (
+        nx >= 0 &&
+        nx < n &&
+        ny >= 0 &&
+        ny < m &&
+        grid[nx][ny] === 1 &&
+        !visited[nx][ny]
+      ) {
+        visited[nx][ny] = true;
+        queue.push([nx, ny]);
+      }
+    }
+  }
+
+  return area;
+}
+
+const grid = [
+  [1, 1, 0],
+  [0, 1, 0],
+  [0, 1, 1],
+];
+console.log(bfs2(grid, 0, 0)); // 5
