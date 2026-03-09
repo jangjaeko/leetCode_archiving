@@ -8,11 +8,12 @@ var solveNQueens = function (n) {
   const cols = new Set(); // 사용 중인 열
   const diag1 = new Set(); // row - col
   const diag2 = new Set(); // row + col
-
+  let count = 0;
   function backtrack(row) {
     // 모든 행에 퀸을 다 놓았으면 정답 저장
     if (row === n) {
       result.push(board.map((r) => r.join("")));
+
       return;
     }
 
@@ -43,44 +44,7 @@ var solveNQueens = function (n) {
   }
 
   backtrack(0);
-  return result;
+  return count;
 };
 
 console.log(solveNQueens(4));
-
-// 찍수일 경우 첫번째 줄은 양 끝에 퀸이 못간다.
-// 아랫줄은 위의 칸의 퀸보도 2칸 더 오른쪽으로 간다, 단 맨끝에 닿은 경우 한 칸만 이동한다.
-// 첫번쨰 줄의 2번째의 퀸이 들어가는 경우부터 n-1번째 자리에 퀸이 놓이는 경우까지 모양을 만들 수 있음.
-//["Q....","..Q..","....Q",".Q...","...Q."]
-
-/**
- * ".Q....",
-   "...Q..",
-   ".....Q",
-   "Q.....",
-   "..Q...",
-   "....Q."
-
-    "..Q...",
-    ".....Q",
-    ".Q....",
-    "....Q.",
-    "Q.....",
-    "...Q.."
-
-    "...Q..",
-    "Q.....",
-    "....Q.",
-    ".Q....",
-    ".....Q",
-    "..Q..."
-    
-    "....Q.",
-    "..Q...",
-    "Q.....",
-    ".....Q",
-    "...Q..",
-    ".Q...."
- */
-
-([], [], []);
