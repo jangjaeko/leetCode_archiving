@@ -5,7 +5,6 @@
 var generateMatrix = function (n) {
   const matrix = Array.from({ length: n }, () => Array(n).fill(0));
 
-  // 방향: 우, 하, 좌, 상
   const dirs = [
     [0, 1],
     [1, 0],
@@ -17,22 +16,25 @@ var generateMatrix = function (n) {
     col = 0;
   let num = 1;
 
-  // 이동 횟수 패턴: n, n-1, n-1, n-2, n-2, ..., 1, 1
   let steps = n;
-  let count = 0; // 같은 steps를 몇 번 썼는지
+  let count = 1; // ✅ 1로 시작
 
   while (num <= n * n) {
     for (let i = 0; i < steps; i++) {
       matrix[row][col] = num++;
-      row += dirs[dirIdx][0];
-      col += dirs[dirIdx][1];
+      if (i < steps - 1) {
+        // ✅ 마지막 칸에선 이동 안 함
+        row += dirs[dirIdx][0];
+        col += dirs[dirIdx][1];
+      }
     }
 
-    // 방향 전환
+    // 방향 전환 후 한 칸 이동
     dirIdx = (dirIdx + 1) % 4;
-    count++;
+    row += dirs[dirIdx][0];
+    col += dirs[dirIdx][1];
 
-    // 두 번 쓰면 steps 줄이기 (첫 번째는 한 번만)
+    count++;
     if (count === 2) {
       steps--;
       count = 0;
